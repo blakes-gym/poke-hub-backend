@@ -11,8 +11,16 @@ const db = new sequelize(
 )
 
 async function connect() {
-  await db.sync({ force: true }).catch(err => console.error(err))
+  require('./models')
+  const force = process.env.NODE_ENV === 'production' ? false : true
+  await db.sync({ force }).catch(err => console.error(err))
+
+  if (force) {
+    const seed = require('./seed')
+    await seed()
+  }
+
   console.log('\nconnected to db')
 }
 
-module.exports = { connect, db }
+module.exports = { db, connect }
