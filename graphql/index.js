@@ -29,7 +29,10 @@ const resolvers = {
       console.log('heyo')
       return 'Hello world!'
     },
-    pokemon: (parent, { id }) => Pokemon.findOne({ where: { id }, raw: true })
+    pokemon: (parent, { id }) => {
+      console.log('hi')
+      return Pokemon.findOne({ where: { id }, raw: true })
+    }
   }
 }
 
