@@ -1,13 +1,29 @@
 require('dotenv').config()
+
 const express = require('express')
-const { connect } = require('./db')
+
+const graphql = require('./graphql')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+graphql.applyMiddleware({ app })
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${graphql.graphqlPath}`)
+)
 
-app.listen(PORT, () => {
-  console.log(`\nlistening on ${PORT}`)
-  connect()
-})
+// const express = require('express')
+
+// const schema = require('./graphql/schema')
+// const { connect } = require('./db')
+
+// const app = express()
+// const PORT = process.env.PORT || 3000
+
+// schema.applyMiddleware({ app })
+
+// app.get('/', (req, res) => res.send('Hello World!'))
+
+// app.listen(PORT, () => {
+//   console.log(`\nlistening on ${PORT}`)
+//   connect()
+// })
