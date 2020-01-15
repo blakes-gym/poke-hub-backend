@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server-express')
+const { Op } = require('sequelize')
 
 const { Pokemon } = require('../db/models')
 
@@ -6,6 +7,7 @@ const typeDefs = gql`
   type Query {
     hello: String
     pokemon(id: ID!): Pokemon
+    pokemons(id: [ID!]): [Pokemon]
   }
   type Pokemon {
     id: ID!
@@ -32,6 +34,14 @@ const resolvers = {
     pokemon: (parent, { id }) => {
       console.log('hi')
       return Pokemon.findOne({ where: { id }, raw: true })
+    },
+    pokemons: (parent, args) => {
+      console.log(args)
+      Pokemon.findAll({
+        where: {
+          [Op.or]: args.id
+        }
+      }).then(data => console.log(data))
     }
   }
 }
