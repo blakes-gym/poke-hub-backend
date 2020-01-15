@@ -4,7 +4,6 @@ const express = require('express')
 const cors = require('cors')
 
 const graphql = require('./graphql')
-
 const { connect } = require('./db')
 
 const app = express()
