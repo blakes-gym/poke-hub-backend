@@ -12,7 +12,7 @@ const db = new sequelize(
 
 async function connect() {
   require('./models')
-  const force = process.env.NODE_ENV === 'production' ? false : true
+  const force = true
   await db.sync({ force }).catch(err => console.error(err))
 
   if (force) {
