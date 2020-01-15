@@ -1,28 +1,34 @@
 const { Pokemon } = require('./models')
-const data = require('./dummyData')
+const fs = require('fs')
 const _ = require('lodash')
 
-module.exports = async function() {
-  const promises = data.map(async pokemon =>
-    Pokemon.create({
-      id: pokemon.DexNo,
-      type1: pokemon.Type[0].toLowerCase(),
-      type2: get(pokemon.Type[1]),
-      name: pokemon.Name,
-      hp: pokemon.Stats.HP,
-      attack: pokemon.Stats.Attack,
-      defense: pokemon.Stats.Defense,
-      spatk: pokemon.Stats['Sp. Atk'],
-      spdef: pokemon.Stats['Sp. Def'],
-      speed: pokemon.Stats.Speed,
-      sprite: pokemon.Sprite,
-      icon: pokemon.icon
-    })
-  )
-
-  await Promise.all(promises).catch(err => console.error(err))
+const data = fs.readFileSync('db/pokemon.csv', 'utf8')
+const split = data.split('\n')
+const parsed = []
+for (const [i, pokemon] of split.entries()) {
+  const split2 = pokemon.split(',')
+  const obj = {
+    id: split2[0],
+    name: split2[1],
+    icon: split2[2],
+    sprite: split2[3],
+    type1: split2[4],
+    type2: split2[5] || undefined,
+    hp: split2[6],
+    atk: split2[7],
+    def: split2[8],
+    spatk: split2[9],
+    spdef: split2[10],
+    speed: split2[11]
+  }
+  console.log(obj)
+  parsed.push(obj)
 }
 
-function get(data) {
-  if (data) return data.toLowerCase()
+module.exports = function seed() {
+  return new Promise((resolve, reject) =>
+    Pokemon.bulkCreate(parsed)
+      .then(data => resolve(data))
+      .catch(err => reject(err))
+  )
 }

@@ -6,7 +6,8 @@ const db = new sequelize(
   process.env.DBPASSWORD,
   {
     host: process.env.DBHOST,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: false
   }
 )
 
@@ -17,7 +18,7 @@ async function connect() {
 
   if (force) {
     const seed = require('./seed')
-    await seed()
+    await seed().catch(err => console.error(err))
   }
 
   console.log('\nconnected to db')
