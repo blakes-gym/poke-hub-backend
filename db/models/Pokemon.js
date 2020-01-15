@@ -50,8 +50,8 @@ Pokemon.init(
       }
     },
     hp: Sequelize.INTEGER,
-    attack: Sequelize.INTEGER,
-    defense: Sequelize.INTEGER,
+    atk: Sequelize.INTEGER,
+    def: Sequelize.INTEGER,
     spatk: Sequelize.INTEGER,
     spdef: Sequelize.INTEGER,
     speed: Sequelize.INTEGER,
