@@ -36,6 +36,7 @@ Pokemon.init(
     },
     name: Sequelize.STRING,
     sprite: Sequelize.STRING,
+    icon: Sequelize.STRING,
     type1: {
       type: Sequelize.STRING,
       validate: {

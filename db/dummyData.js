@@ -13,6 +13,7 @@ module.exports = [
       Total: 405
     },
     Sprite: 'https://cdn.bulbagarden.net/upload/6/62/093Haunter.png',
+    icon: 'https://www.serebii.net/pokedex-swsh/icon/093.png',
     Moves: [
       {
         Level: 12,
@@ -53,6 +54,7 @@ module.exports = [
     ]
   },
   {
+    icon: 'https://www.serebii.net/pokedex-swsh/icon/005.png',
     DexNo: 5,
     Name: 'Charmeleon',
     Type: ['Fire'],
@@ -106,6 +108,7 @@ module.exports = [
     ]
   },
   {
+    icon: 'https://www.serebii.net/pokedex-swsh/icon/220.png',
     DexNo: 220,
     Name: 'Swinub',
     Type: ['Ice', 'Ground'],
@@ -159,6 +162,7 @@ module.exports = [
     ]
   },
   {
+    icon: 'https://www.serebii.net/pokedex-swsh/icon/329.png',
     DexNo: 329,
     Name: 'Vibrava',
     Type: ['Ground', 'Dragon'],
