@@ -1,27 +1,12 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const fs = require('file-system');
-const path = require('path');
+const pokemonArr = require('./names.js');
 
-const pokemonArr = ['Charizard', 'Venusaur', 'Whismur', 'Hitmonlee'];
+// const pokemonArr = ['Charizard', 'Venusaur', 'Whismur', 'Hitmonlee'];
 const file = 'db/pokemon_data.csv';
 
-// function writeData() {
-//   // write all pokemon data to a csv
-//   if (fs.existsSync(file)) {
-//     fs.unlinkSync(file);
-//   }
-
-//   // const stream = fs.createWriteStream(file);
-//   // stream.on('err', err => console.log(err));
-//   // stream.on('close', () => console.log('Done writing all pokemon data!'));
-
-//   fs.writeFile(
-//     file,
-//     'id,name,sprite,type1,type2,hp,attack,defense,spatk,spdef,speed,wishList'
-//   );
-// }
-
+// write all data to a csv file
 function writeAllData() {
   let writeAllData = '';
   for (var i = 0; i < pokemonArr.length; i++) {
@@ -46,7 +31,6 @@ function writeAllData() {
           });
         });
     } else {
-      // writeAllData += createPokemonData(pokemonArr[i]);
       Promise.all([
         getID(pokemonArr[i]),
         getSprite(pokemonArr[i]),
@@ -58,7 +42,6 @@ function writeAllData() {
       });
     }
   }
-  console.log(writeAllData);
   return writeAllData;
 }
 writeAllData();
@@ -202,15 +185,3 @@ function getSprite(pokemon) {
     );
   });
 }
-
-async function createPokemonData(pokemon) {
-  const id = await getID(pokemon);
-  const sprite = await getSprite(pokemon);
-  const types = await getTypes(pokemon);
-  const stats = await getStats(pokemon);
-
-  return (
-    id + ',' + pokemon + ',' + sprite + ',' + types + ',' + stats + ',' + 'f'
-  );
-}
-// console.log(createPokemonData('Charizard'));
