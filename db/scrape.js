@@ -20,26 +20,52 @@ request({
 
 =======
 const fs = require('file-system');
-const path = require('path');
+const pokemonArr = require('./names.js');
 
-const pokemonArr = ['Charizard', 'Venusaur', 'Whismur', 'Hitmonlee'];
+// const pokemonArr = ['Charizard', 'Venusaur', 'Whismur', 'Hitmonlee'];
+const file = 'db/pokemon_data.csv';
 
-const writeData = function() {
-  // write all pokemon data to a csv
-  if (fs.existsSync(file)) {
-    fs.unlinkSync(file);
-  }
-
-  const stream = fs.createWriteStream(file);
-  stream.on('err', err => console.log(err));
-  stream.on('close', () => console.log('Done writing all pokemon data!'));
-
+// write all data to a csv file
+function writeAllData() {
+  let writeAllData = '';
   for (var i = 0; i < pokemonArr.length; i++) {
-    stream.write;
+    if (i === pokemonArr.length - 1) {
+      Promise.all([
+        getID(pokemonArr[i]),
+        getSprite(pokemonArr[i]),
+        getTypes(pokemonArr[i]),
+        getStats(pokemonArr[i])
+      ])
+        .then(resultArr => {
+          writeAllData += resultArr.join(',');
+          return writeAllData;
+        })
+        .then(resultStr => {
+          fs.writeFile(file, resultStr, err => {
+            if (err) {
+              console.log('err', err);
+            } else {
+              console.log('Done writing!');
+            }
+          });
+        });
+    } else {
+      Promise.all([
+        getID(pokemonArr[i]),
+        getSprite(pokemonArr[i]),
+        getTypes(pokemonArr[i]),
+        getStats(pokemonArr[i])
+      ]).then(resultArr => {
+        resultArr.join(',');
+        writeAllData += resultArr + '\n';
+      });
+    }
   }
-};
+  return writeAllData;
+}
+writeAllData();
 
-const getID = function(pokemon) {
+function getID(pokemon) {
   return new Promise(function(resolve, reject) {
     request(
       {
@@ -54,13 +80,13 @@ const getID = function(pokemon) {
         let id = $(
           '#mw-content-text > table:nth-child(2) > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > th > big > big > a > span'
         ).text();
-        resolve(id);
+        resolve(id + ',' + pokemon);
       }
     );
   });
-};
+}
 
-const getStats = function(pokemon) {
+function getStats(pokemon) {
   return new Promise(function(resolve, reject) {
     request(
       {
@@ -127,9 +153,9 @@ const getStats = function(pokemon) {
       }
     );
   });
-};
+}
 
-const getTypes = function(pokemon) {
+function getTypes(pokemon) {
   return new Promise(function(resolve, reject) {
     request(
       {
@@ -154,9 +180,9 @@ const getTypes = function(pokemon) {
       }
     );
   });
-};
+}
 
-const getSprite = function(pokemon) {
+function getSprite(pokemon) {
   return new Promise(function(resolve, reject) {
     request(
       {
@@ -177,28 +203,4 @@ const getSprite = function(pokemon) {
       }
     );
   });
-};
-
-async function createPokemonData(pokemon) {
-  const id = await getID(pokemon);
-  const sprite = await getSprite(pokemon);
-  const types = await getTypes(pokemon);
-  const stats = await getStats(pokemon);
-
-  console.log(
-    id +
-      ',' +
-      pokemon +
-      ',' +
-      sprite +
-      ',' +
-      types +
-      ',' +
-      stats +
-      ',' +
-      'f' +
-      '\n'
-  );
 }
-createPokemonData('Charmander');
->>>>>>> master
