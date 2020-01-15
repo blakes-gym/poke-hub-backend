@@ -18,7 +18,14 @@
   },
   "homepage": "https://github.com/blakes-gym/poke-hub-backend#readme",
   "dependencies": {
+<<<<<<< HEAD
     "cheerio": "^1.0.0-rc.3",
+=======
+    "apollo-server-express": "^2.9.16",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+>>>>>>> master
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
