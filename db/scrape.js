@@ -12,7 +12,7 @@ request({
 
     let $ = cheerio.load(body);
 
-    let title = $('#mw-content-text > table:nth-child(2) > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > big > big > b');
+    let title = $('#mw-content-text > table:nth-child(125) > tbody > tr:nth-child(3) > td:nth-child(3)');
 
     console.log(title.text());
 });
