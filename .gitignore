@@ -104,3 +104,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+#pokemon_data csv
+db/pokemon_data.csv
