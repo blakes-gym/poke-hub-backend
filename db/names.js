@@ -3,7 +3,7 @@ module.exports = [
   'Abra',
   'Absol',
   'Accelgor',
-  'Aegislash',
+  // 'Aegislash',
   'Aerodactyl',
   'Aggron',
   'Aipom',
@@ -892,4 +892,4 @@ module.exports = [
   'Zubat',
   'Zweilous',
   'Zygarde'
-];
+]
