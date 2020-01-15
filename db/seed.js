@@ -15,7 +15,8 @@ module.exports = async function() {
       spatk: pokemon.Stats['Sp. Atk'],
       spdef: pokemon.Stats['Sp. Def'],
       speed: pokemon.Stats.Speed,
-      sprite: pokemon.Sprite
+      sprite: pokemon.Sprite,
+      icon: pokemon.icon
     })
   )
 
