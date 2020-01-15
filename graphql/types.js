@@ -19,5 +19,6 @@ module.exports = gql`
     spdef: Int
     speed: Int
     wishList: Boolean
+    icon: String
   }
 `
