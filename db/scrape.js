@@ -3,7 +3,13 @@ const request = require('request');
 
 const pokemonArr = ['Charizard', 'Venusaur', 'Whismur', 'Hitmonlee'];
 
-const getStats = function (pokemon) {
+const writeData = function() {
+  // write all pokemon data to a csv
+  // for (var i = 0; i < pokemonArr.length; i++) {
+  // }
+};
+
+const getStats = function(pokemon) {
   request(
     {
       method: 'GET',
@@ -12,7 +18,7 @@ const getStats = function (pokemon) {
     (err, res, body) => {
       if (err) return console.error(err);
 
-      let statsArr = [];
+      let stats = '';
       let $ = cheerio.load(body);
 
       $('h4').each((i, el) => {
@@ -51,15 +57,29 @@ const getStats = function (pokemon) {
           const total = $(statsTable)
             .find('tbody > tr:nth-child(9) > th > div:nth-child(2)')
             .text();
-          statsArr.push(hp, atk, def, spatk, spdef, spd, total);
-          console.log(statsArr);
+          stats =
+            hp +
+            ',' +
+            atk +
+            ',' +
+            def +
+            ',' +
+            spatk +
+            ',' +
+            spdef +
+            ',' +
+            spd +
+            ',' +
+            total +
+            '/n';
+          console.log('stats', stats);
         }
       });
     }
   );
-}
+};
 
-const getTypes = function (pokemon) {
+const getTypes = function(pokemon) {
   request(
     {
       method: 'GET',
@@ -85,8 +105,23 @@ const getTypes = function (pokemon) {
   );
 };
 
+const getSprite = function(pokemon) {
+  request(
+    {
+      method: 'GET',
+      url: `https://bulbapedia.bulbagarden.net/wiki/${pokemon}_(Pok%C3%A9mon)`
+    },
+    (err, res, body) => {
+      if (err) return console.error(err);
 
+      let $ = cheerio.load(body);
+      let sprite =
+        'https:' +
+        $(
+          '#mw-content-text > table:nth-child(2) > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > a > img'
+        )[0].attribs.src;
 
-// const getSprites(pokemon) {
-
-// }
+      return sprite;
+    }
+  );
+};
