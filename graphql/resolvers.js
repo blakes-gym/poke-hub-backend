@@ -8,12 +8,8 @@ module.exports = {
     },
     pokemon: (parent, { id }) =>
       Pokemon.findAll({
-        where: { id },
-        raw: true
+        where: { id }
       }),
-    all: () =>
-      Pokemon.findAll({
-        raw: true
-      })
+    all: () => Pokemon.findAll({})
   }
 }
