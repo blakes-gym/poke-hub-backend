@@ -1,24 +1,5 @@
 const cheerio = require('cheerio');
 const request = require('request');
-<<<<<<< HEAD
-
-
-
-request({
-    method: 'GET',
-    url: 'https://bulbapedia.bulbagarden.net/wiki/Charmander_(Pok%C3%A9mon)'
-}, (err, res, body) => {
-
-    if (err) return console.error(err);
-
-    let $ = cheerio.load(body);
-
-    let title = $('#mw-content-text > table:nth-child(125) > tbody > tr:nth-child(3) > td:nth-child(3)');
-
-    console.log(title.text());
-});
-
-=======
 const fs = require('file-system');
 const pokemonArr = require('./names.js');
 
@@ -29,6 +10,7 @@ const file = 'db/pokemon_data.csv';
 function writeAllData() {
   let writeAllData = '';
   for (var i = 0; i < pokemonArr.length; i++) {
+    console.log(pokemonArr[i])
     if (i === pokemonArr.length - 1) {
       Promise.all([
         getID(pokemonArr[i]),
