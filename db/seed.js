@@ -10,8 +10,8 @@ for (const [i, pokemon] of split.entries()) {
   const obj = {
     id: split2[0],
     name: split2[1],
-    icon: split2[2],
-    sprite: split2[3],
+    sprite: split2[2],
+    icon: split2[3],
     type1: split2[4],
     type2: split2[5] || undefined,
     hp: split2[6],
