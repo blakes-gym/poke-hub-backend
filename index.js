@@ -5,7 +5,7 @@ const cors = require('cors')
 
 const graphql = require('./graphql')
 const { connect } = require('./db')
-const { Pokemon } = require('./db/models')
+const routes = require('./routes')
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -13,11 +13,10 @@ const PORT = process.env.PORT || 4000
 graphql.applyMiddleware({ app })
 app.use(cors())
 
-app.get('/api/pokemon', (req, res) => {
-  Pokemon.findAll({})
-    .then(data => res.send(data))
-    .catch(err => res.status(500).send(err))
-})
+for (const route in routes) {
+  const name = route.split('.')[0]
+  app.use('/api/' + name, routes[route])
+}
 
 app.listen(PORT, () => {
   console.log(`\nlistening on ${PORT}`)
