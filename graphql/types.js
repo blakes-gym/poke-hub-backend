@@ -9,16 +9,17 @@ module.exports = gql`
   type Pokemon {
     id: ID!
     name: String
+    icon: String
     sprite: String
     type1: String
     type2: String
     hp: Int
-    attack: Int
-    defense: Int
+    atk: Int
+    def: Int
     spatk: Int
     spdef: Int
     speed: Int
+    total: Int
     wishList: Boolean
-    icon: String
   }
 `

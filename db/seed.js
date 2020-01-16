@@ -21,7 +21,6 @@ for (const [i, pokemon] of split.entries()) {
     spdef: split2[10],
     speed: split2[11]
   }
-  console.log(obj)
   parsed.push(obj)
 }
 

@@ -58,7 +58,9 @@ Pokemon.init(
     total: {
       type: Sequelize.VIRTUAL,
       get() {
-        return this.attack + this.defense + this.spatk + this.spdef + this.speed
+        return (
+          this.hp + this.atk + this.def + this.spatk + this.spdef + this.speed
+        )
       }
     },
     wishList: {
