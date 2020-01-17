@@ -30,6 +30,14 @@ router.put('/wishlist', (req, res) => {
   .catch(err => res.status(500).send(err))
 })
 
+//add a pokemon to the wishlist
+
+router.get('/wishlist', (req, res) => {
+  db.query(`SELECT * from pokemons where "wishList"=true;`)
+  .then(data => res.send(data[0]))
+  .catch(err => res.status(500).send(err))
+})
+
 //seed a simulated a pokemon team
 
 router.get('/teamSeedTest', (req, res) => {
