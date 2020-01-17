@@ -64,17 +64,17 @@ Pokemon.init(
           this.hp + this.atk + this.def + this.spatk + this.spdef + this.speed
         )
       }
-    },
-    moveOne: Sequelize.STRING,
-    moveTwo: Sequelize.STRING,
-    moveThree: Sequelize.STRING,
-    moveFour: Sequelize.STRING,
-    item: Sequelize.STRING,
-    nature: Sequelize.STRING,
-    wishList: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false
-    },
+    }
+    // moveOne: Sequelize.STRING,
+    // moveTwo: Sequelize.STRING,
+    // moveThree: Sequelize.STRING,
+    // moveFour: Sequelize.STRING,
+    // item: Sequelize.STRING,
+    // nature: Sequelize.STRING,
+    // wishList: {
+    //   type: Sequelize.BOOLEAN,
+    //   defaultValue: false
+    // }
   },
   {
     sequelize: db,
@@ -88,39 +88,4 @@ Pokemon.init(
   }
 )
 
-//Team model
-
-class Team extends Model {}
-
-Team.init(
-  {
-  id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-  teamId: {
-      type: Sequelize.INTEGER
-  },
-  pokeId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Pokemon,
-      key: 'id'
-    }
-  },
-  teamName: Sequelize.STRING
-},
-{
-  sequelize: db,
-  modelName: 'team'
-}
-)
-
-// Pokemon and Team associations
-
-Pokemon.belongsToMany(Team, {through: 'PokemonTeam'})
-Team.belongsToMany(Pokemon, {through: 'PokemonTeam'})
-
-module.exports.Pokemon = Pokemon
-module.exports.Team = Team
+module.exports = Pokemon

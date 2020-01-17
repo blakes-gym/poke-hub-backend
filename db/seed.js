@@ -1,4 +1,4 @@
-const { Pokemon } = require('./models/Pokemon')
+const { Pokemon } = require('./models')
 const fs = require('fs')
 const _ = require('lodash')
 

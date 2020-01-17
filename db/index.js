@@ -12,7 +12,7 @@ const db = new sequelize(
 )
 
 async function connect() {
-  require('./models')
+  require('./associations')
   const force = true
   await db.sync({ force }).catch(err => console.error(err))
 
