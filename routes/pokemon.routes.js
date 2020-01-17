@@ -7,7 +7,26 @@ const { db } = require('../db/index')
 //get all pokemon
 
 router.get('/', (req, res) => {
-  Pokemon.findAll({})
+  Pokemon.findAll({
+    order: ['id']
+  })
+  .then(data => res.send(data))
+  .catch(err => res.status(500).send(err))
+})
+
+
+//Edit a pokemon (moves 1-4, nature, item)
+
+router.put('/', (req, res) => {
+  let attribute, newValue;
+  let pokemonId = req.body.pokemonId;
+  for (var key in req.body) {
+    if (key !== 'pokemonId') {
+      attribute = key;
+      newValue = req.body[key];
+    }
+  }
+  db.query(`UPDATE pokemons SET "${attribute}"='${newValue}' WHERE id=${pokemonId};`)
   .then(data => res.send(data))
   .catch(err => res.status(500).send(err))
 })
@@ -21,11 +40,12 @@ router.get('/team/:id', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
-//add a pokemon to the wishlist
+//toggle pokemon's wishlist status
 
 router.put('/wishlist', (req, res) => {
   let pokemonId = req.body.pokemonId;
-  db.query(`UPDATE pokemons SET "wishList"=true WHERE id=${pokemonId};`)
+  let newValue = req.body.boolean;
+  db.query(`UPDATE pokemons SET "wishList"=${newValue} WHERE id=${pokemonId};`)
   .then(data => res.send(data))
   .catch(err => res.status(500).send(err))
 })
