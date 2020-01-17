@@ -30,7 +30,7 @@ router.put('/wishlist', (req, res) => {
   .catch(err => res.status(500).send(err))
 })
 
-//add a pokemon to the wishlist
+//retrieve all pokemon from the wishlist
 
 router.get('/wishlist', (req, res) => {
   db.query(`SELECT * from pokemons where "wishList"=true;`)
