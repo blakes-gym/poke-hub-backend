@@ -3,6 +3,8 @@ const { db } = require('../index.js')
 
 const Model = Sequelize.Model
 
+//Pokemon model
+
 class Pokemon extends Model {}
 
 const types = [
@@ -66,7 +68,7 @@ Pokemon.init(
     wishList: {
       type: Sequelize.BOOLEAN,
       defaultValue: false
-    }
+    },
   },
   {
     sequelize: db,
@@ -80,4 +82,39 @@ Pokemon.init(
   }
 )
 
-module.exports = Pokemon
+//Team model
+
+class Team extends Model {}
+
+Team.init(
+  {
+  id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+  teamId: {
+      type: Sequelize.INTEGER
+  },
+  pokeId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Pokemon,
+      key: 'id'
+    }
+  },
+  teamName: Sequelize.STRING
+},
+{
+  sequelize: db,
+  modelName: 'team'
+}
+)
+
+// Pokemon and Team associations
+
+Pokemon.belongsToMany(Team, {through: 'PokemonTeam'})
+Team.belongsToMany(Pokemon, {through: 'PokemonTeam'})
+
+module.exports.Pokemon = Pokemon
+module.exports.Team = Team
