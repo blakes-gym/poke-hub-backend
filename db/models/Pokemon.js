@@ -65,6 +65,12 @@ Pokemon.init(
         )
       }
     },
+    moveOne: Sequelize.STRING,
+    moveTwo: Sequelize.STRING,
+    moveThree: Sequelize.STRING,
+    moveFour: Sequelize.STRING,
+    item: Sequelize.STRING,
+    nature: Sequelize.STRING,
     wishList: {
       type: Sequelize.BOOLEAN,
       defaultValue: false
