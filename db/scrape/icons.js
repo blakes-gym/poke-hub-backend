@@ -1,8 +1,8 @@
 require('dotenv').config()
 const cheerio = require('cheerio')
 const request = require('request')
-const { Pokemon } = require('./models')
-const { connect } = require('./index')
+const { Pokemon } = require('../models')
+const { connect } = require('../index')
 
 icons()
 
