@@ -1,7 +1,7 @@
-const types = require('../data/types')
+const types = require("../data/types")
 
 module.exports = (sequelize, DataTypes) => {
-  const Pokemon = sequelize.define('Pokemon', {
+  const Pokemon = sequelize.define("Pokemon", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true
@@ -46,10 +46,14 @@ module.exports = (sequelize, DataTypes) => {
     //   defaultValue: false
     // }
   })
-
-  // User.associate = function(models) {
-  //   models.User.hasMany(models.Task);
-  // };
+  Pokemon.associate = function(models) {
+    models.Pokemon.hasMany(models.Team, { as: "p1", foreignKey: "p1Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p2", foreignKey: "p2Id" })
+    // models.Pokemon.belongsToMany(models.Team, { as: "p3" })
+    // models.Pokemon.belongsToMany(models.Team, { as: "p4" })
+    // models.Pokemon.belongsToMany(models.Team, { as: "p5" })
+    // models.Pokemon.belongsToMany(models.Team, { as: "p6" })
+  }
 
   return Pokemon
 }
@@ -60,4 +64,4 @@ module.exports = (sequelize, DataTypes) => {
 // // Pokemon and Team associations
 
 // Pokemon.belongsToMany(Team, { through: 'PokemonTeam' })
-// Team.belongsToMany(Pokemon, { through: 'PokemonTeam' })
+// Pokemon.belongsToMany(Pokemon, { through: 'PokemonTeam' })
