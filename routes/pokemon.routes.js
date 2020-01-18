@@ -2,17 +2,26 @@ const express = require('express')
 const router = express.Router()
 const { Pokemon } = require('../db/models')
 
-//get all pokemon
-
 router.get('/', (req, res) => {
+  Pokemon.findAll({
+    where: {
+      id: req.query.id
+    }
+  })
+    .then(data => res.send(data))
+    .catch(err => {
+      console.error(err)
+      res.status(500).send(err)
+    })
+})
+
+router.get('/all', (req, res) => {
   Pokemon.findAll({
     order: ['id']
   })
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
 })
-
-//Edit a pokemon (moves 1-4, nature, item)
 
 router.put('/', (req, res) => {
   const body = req.body

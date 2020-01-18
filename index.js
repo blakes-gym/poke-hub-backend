@@ -3,7 +3,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const graphql = require('./graphql')
 const models = require('./db/models')
 const routes = require('./routes')
 const seed = require('./db/seeders/seed')
@@ -12,7 +11,6 @@ const app = express()
 const PORT = process.env.PORT || 4000
 const ENV = process.env.NODE_ENV
 
-graphql.applyMiddleware({ app })
 app.use(cors())
 app.use(bodyParser.json())
 
