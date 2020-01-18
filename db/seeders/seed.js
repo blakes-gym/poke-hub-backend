@@ -1,12 +1,12 @@
-const { Pokemon, Team } = require("../models")
-const fs = require("fs")
-const _ = require("lodash")
+const { Pokemon, Team } = require('../models')
+const fs = require('fs')
+const _ = require('lodash')
 
-const data = fs.readFileSync("db/data/pokemon.csv", "utf8")
-const split = data.split("\n")
+const data = fs.readFileSync('db/data/pokemon.csv', 'utf8')
+const split = data.split('\n')
 const parsed = []
 for (const [i, pokemon] of split.entries()) {
-  const split2 = pokemon.split(",")
+  const split2 = pokemon.split(',')
   const obj = {
     id: split2[0],
     name: split2[1],
@@ -29,13 +29,13 @@ module.exports = () =>
     Pokemon.bulkCreate(parsed)
       .then(data =>
         Team.create({
-          name: "best",
+          name: 'best',
           p1Id: 1,
           p2Id: 2,
-          p3Id: 3,
-          p4Id: 4,
-          p5Id: 5,
-          p6Id: 6
+          p3Id: 3
+          // p4Id: 4,
+          // p5Id: 5
+          // p6Id: 6
         })
       )
       .then(data => resolve(data))
