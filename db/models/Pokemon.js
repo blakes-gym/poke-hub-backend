@@ -47,12 +47,12 @@ module.exports = (sequelize, DataTypes) => {
     // }
   })
   Pokemon.associate = function(models) {
-    models.Pokemon.hasMany(models.Team, { as: "p1", foreignKey: "p1Id" })
-    models.Pokemon.hasMany(models.Team, { as: "p2", foreignKey: "p2Id" })
-    // models.Pokemon.belongsToMany(models.Team, { as: "p3" })
-    // models.Pokemon.belongsToMany(models.Team, { as: "p4" })
-    // models.Pokemon.belongsToMany(models.Team, { as: "p5" })
-    // models.Pokemon.belongsToMany(models.Team, { as: "p6" })
+    models.Pokemon.hasMany(models.Team, { as: "p1" })
+    models.Pokemon.hasMany(models.Team, { as: "p2" })
+    models.Pokemon.hasMany(models.Team, { as: "p3" })
+    models.Pokemon.hasMany(models.Team, { as: "p4" })
+    models.Pokemon.hasMany(models.Team, { as: "p5" })
+    models.Pokemon.hasMany(models.Team, { as: "p6" })
   }
 
   return Pokemon

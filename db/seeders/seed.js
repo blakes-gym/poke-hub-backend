@@ -31,11 +31,11 @@ module.exports = () =>
         Team.create({
           name: "best",
           p1Id: 1,
-          p2Id: 3
-          // p3Id: 1,
-          // p4Id: 1,
-          // p5Id: 1,
-          // p6Id: 1
+          p2Id: 2,
+          p3Id: 3,
+          p4Id: 4,
+          p5Id: 5,
+          p6Id: 6
         })
       )
       .then(data => resolve(data))

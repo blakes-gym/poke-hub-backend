@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
   Team.associate = function(models) {
     models.Team.belongsTo(models.Pokemon, { as: "p1" })
     models.Team.belongsTo(models.Pokemon, { as: "p2" })
-    // models.Team.hasOne(models.Pokemon, { as: "p3" })
-    // models.Team.hasOne(models.Pokemon, { as: "p4" })
-    // models.Team.hasOne(models.Pokemon, { as: "p5" })
-    // models.Team.hasOne(models.Pokemon, { as: "p6" })
+    models.Team.belongsTo(models.Pokemon, { as: "p3" })
+    models.Team.belongsTo(models.Pokemon, { as: "p4" })
+    models.Team.belongsTo(models.Pokemon, { as: "p5" })
+    models.Team.belongsTo(models.Pokemon, { as: "p6" })
   }
 
   return Team
