@@ -1,8 +1,8 @@
-const { Pokemon } = require('./models2')
+const { Pokemon } = require('../models')
 const fs = require('fs')
 const _ = require('lodash')
 
-const data = fs.readFileSync('db/pokemon.csv', 'utf8')
+const data = fs.readFileSync('db/data/pokemon.csv', 'utf8')
 const split = data.split('\n')
 const parsed = []
 for (const [i, pokemon] of split.entries()) {
@@ -24,10 +24,9 @@ for (const [i, pokemon] of split.entries()) {
   parsed.push(obj)
 }
 
-module.exports = function seed() {
-  return new Promise((resolve, reject) =>
+module.exports = () =>
+  new Promise((resolve, reject) =>
     Pokemon.bulkCreate(parsed)
       .then(data => resolve(data))
       .catch(err => reject(err))
   )
-}

@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
-const { Team } = require('../db/models2/Pokemon')
-const { db } = require('../db/index')
+const { Team } = require('../db/models')
+const sequelize = require('sequelize')
 
 //get pokemon from a team
 
 router.get('/', (req, res) => {
   let teamId = req.params.id
-  db.query(
-    `SELECT * FROM pokemons INNER JOIN teams ON ("pokemons"."id"="teams"."pokeId") WHERE "teams"."teamId"=${teamId};`
-  )
+  sequelize
+    .query(
+      `SELECT * FROM pokemons INNER JOIN teams ON ("pokemons"."id"="teams"."pokeId") WHERE "teams"."teamId"=${teamId};`
+    )
     .then(data => res.send(data[0]))
     .catch(err => res.status(500).send(err))
 })
