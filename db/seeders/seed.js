@@ -1,4 +1,4 @@
-const { Pokemon, Team } = require("../models")
+const { Pokemon, Team, Wishlist } = require("../models")
 const fs = require("fs")
 const _ = require("lodash")
 
@@ -38,6 +38,18 @@ module.exports = () =>
           p6Id: 6
         })
       )
+      .then(data => {
+        let wlSeed = []
+        for (let i = 1; i < 2; i++) {
+          wlSeed.push({
+            item: "rare candy",
+            wlPokeId: i,
+            nature: "shy UWU",
+            caught: true
+          })
+        }
+        Wishlist.bulkCreate(wlSeed)
+      })
       .then(data => resolve(data))
       .catch(err => reject(err))
   })

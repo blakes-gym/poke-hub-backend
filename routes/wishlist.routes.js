@@ -1,23 +1,23 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
+const { Wishlist } = require("../db/models")
+const { Pokemon } = require("../db/models")
 
-//toggle pokemon's wishlist status
+//retrieve all pokemon from the wishlist
 
-router.put('/wishlist', (req, res) => {
-  let pokemonId = req.body.pokemonId
-  let newValue = req.body.boolean
-  sequelize
-    .query(`UPDATE pokemons SET "wishList"=${newValue} WHERE id=${pokemonId};`)
+router.get("/", (req, res) => {
+  Wishlist.findAll({
+    include: [{ model: Pokemon, as: "wlPoke" }]
+  })
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
 })
 
-//retrieve all pokemon from the wishlist
+//toggle pokemon's wishlist status
 
-router.get('/wishlist', (req, res) => {
-  sequelize
-    .query(`SELECT * from pokemons where "wishList"=true;`)
-    .then(data => res.send(data[0]))
+router.post("/", (req, res) => {
+  Wishlist.create({ ...req.body })
+    .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
 })
 
