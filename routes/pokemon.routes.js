@@ -1,8 +1,8 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
-const { Pokemon } = require('../db/models')
+const { Pokemon } = require("../db/models")
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Pokemon.findAll({
     where: {
       id: req.query.id
@@ -15,15 +15,15 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/all', (req, res) => {
+router.get("/all", (req, res) => {
   Pokemon.findAll({
-    order: ['id']
+    order: ["id"]
   })
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
 })
 
-router.put('/', (req, res) => {
+router.put("/", (req, res) => {
   const body = req.body
   Pokemon.update(body, {
     where: {
