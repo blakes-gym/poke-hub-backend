@@ -1,36 +1,26 @@
-const Sequelize = require('sequelize')
-const { db } = require('../index.js')
-const Pokemon = require('./Pokemon')
-
-const Model = Sequelize.Model
-
-//Team model
-
-class Team extends Model {}
-
-Team.init(
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Team = sequelize.define('team', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     teamId: {
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
-    pokeId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: Pokemon,
-        key: 'id'
-      }
-    },
-    teamName: Sequelize.STRING
-  },
-  {
-    sequelize: db,
-    modelName: 'team'
-  }
-)
+    // pokeId: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: Pokemon,
+    //     key: 'id'
+    //   }
+    // },
+    teamName: DataTypes.STRING
+  })
 
-module.exports = Team
+  // User.associate = function(models) {
+  //   models.User.hasMany(models.Task);
+  // };
+
+  return Team
+}

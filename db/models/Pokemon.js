@@ -1,91 +1,63 @@
-const Sequelize = require('sequelize')
-const { db } = require('../index.js')
+const types = require('../data/types')
 
-const Model = Sequelize.Model
-
-//Pokemon model
-
-class Pokemon extends Model {}
-
-const types = [
-  [
-    'normal',
-    'fire',
-    'water',
-    'electric',
-    'grass',
-    'ice',
-    'fighting',
-    'poison',
-    'ground',
-    'flying',
-    'psychic',
-    'bug',
-    'rock',
-    'ghost',
-    'dragon',
-    'dark',
-    'steel',
-    'fairy'
-  ]
-]
-
-Pokemon.init(
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Pokemon = sequelize.define('pokemon', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true
     },
-    name: Sequelize.STRING,
-    sprite: Sequelize.STRING,
-    icon: Sequelize.STRING,
+    name: DataTypes.STRING,
+    sprite: DataTypes.STRING,
+    icon: DataTypes.STRING,
     type1: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isIn: types
       }
     },
     type2: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isIn: types
       }
     },
-    hp: Sequelize.INTEGER,
-    atk: Sequelize.INTEGER,
-    def: Sequelize.INTEGER,
-    spatk: Sequelize.INTEGER,
-    spdef: Sequelize.INTEGER,
-    speed: Sequelize.INTEGER,
+    hp: DataTypes.INTEGER,
+    atk: DataTypes.INTEGER,
+    def: DataTypes.INTEGER,
+    spatk: DataTypes.INTEGER,
+    spdef: DataTypes.INTEGER,
+    speed: DataTypes.INTEGER,
     total: {
-      type: Sequelize.VIRTUAL,
+      type: DataTypes.VIRTUAL,
       get() {
         return (
           this.hp + this.atk + this.def + this.spatk + this.spdef + this.speed
         )
       }
     }
-    // moveOne: Sequelize.STRING,
-    // moveTwo: Sequelize.STRING,
-    // moveThree: Sequelize.STRING,
-    // moveFour: Sequelize.STRING,
-    // item: Sequelize.STRING,
-    // nature: Sequelize.STRING,
+    // moveOne: DataTypes.STRING,
+    // moveTwo: DataTypes.STRING,
+    // moveThree: DataTypes.STRING,
+    // moveFour: DataTypes.STRING,
+    // item: DataTypes.STRING,
+    // nature: DataTypes.STRING,
     // wishList: {
-    //   type: Sequelize.BOOLEAN,
+    //   type: DataTypes.BOOLEAN,
     //   defaultValue: false
     // }
-  },
-  {
-    sequelize: db,
-    modelName: 'pokemon',
-    indexes: [
-      {
-        unique: true,
-        fields: ['id']
-      }
-    ]
-  }
-)
+  })
 
-module.exports = Pokemon
+  // User.associate = function(models) {
+  //   models.User.hasMany(models.Task);
+  // };
+
+  return Pokemon
+}
+
+// const Pokemon = require('./models/Pokemon')
+// const Team = require('./models/Team')
+
+// // Pokemon and Team associations
+
+// Pokemon.belongsToMany(Team, { through: 'PokemonTeam' })
+// Team.belongsToMany(Pokemon, { through: 'PokemonTeam' })
