@@ -1,32 +1,32 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const { Team } = require("../db/models")
-const { Pokemon } = require("../db/models")
-const { Op } = require("sequelize")
-const sequelize = require("sequelize")
+const { Team } = require('../db/models')
+const { Pokemon } = require('../db/models')
+const { Op } = require('sequelize')
+const sequelize = require('sequelize')
 
 //get pokemon from a team
 
-router.get("/", (req, res) => {
-  let teamName = req.query.name
+router.get('/', (req, res) => {
+  const query = req.query
   Team.findAll({
     where: {
-      name: teamName
+      name: query.name
     },
-    include: [
-      { model: Pokemon, as: "p1" },
-      { model: Pokemon, as: "p2" },
-      { model: Pokemon, as: "p3" },
-      { model: Pokemon, as: "p4" },
-      { model: Pokemon, as: "p5" },
-      { model: Pokemon, as: "p6" }
+    include: query.include && [
+      { model: Pokemon, as: 'p1' },
+      { model: Pokemon, as: 'p2' },
+      { model: Pokemon, as: 'p3' },
+      { model: Pokemon, as: 'p4' },
+      { model: Pokemon, as: 'p5' },
+      { model: Pokemon, as: 'p6' }
     ]
   })
     .then(data => res.send(data))
     .catch(err => console.error(err))
 })
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   let { name, p1Id, p2Id, p3Id, p4Id, p5Id, p6Id } = req.body
   Team.create({
     name,
