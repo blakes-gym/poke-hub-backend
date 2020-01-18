@@ -2,10 +2,6 @@ const express = require('express')
 const router = express.Router()
 const { Team } = require('../db/models')
 const { Pokemon } = require('../db/models')
-const { Op } = require('sequelize')
-const sequelize = require('sequelize')
-
-//get pokemon from a team
 
 router.get('/', (req, res) => {
   const query = req.query
@@ -27,16 +23,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let { name, p1Id, p2Id, p3Id, p4Id, p5Id, p6Id } = req.body
-  Team.create({
-    name,
-    p1Id,
-    p2Id,
-    p3Id,
-    p4Id,
-    p5Id,
-    p6Id
-  })
+  Team.create({ ...req.body })
     .then(data => res.send(data))
     .catch(err => console.error(err))
 })
