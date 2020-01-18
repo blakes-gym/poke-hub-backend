@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const { Pokemon } = require('../db/models/Pokemon')
 const { db } = require('../db/index')
 
 //toggle pokemon's wishlist status

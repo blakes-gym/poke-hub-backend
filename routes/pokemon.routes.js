@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { Pokemon } = require('../db/models/Pokemon')
+const { Pokemon } = require('../db/models2/Pokemon')
 const { db } = require('../db/index')
 
 //get all pokemon
