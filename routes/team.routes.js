@@ -11,7 +11,11 @@ router.get("/", (req, res) => {
   Team.findAll({
     include: [
       { model: Pokemon, as: "p1" },
-      { model: Pokemon, as: "p2" }
+      { model: Pokemon, as: "p2" },
+      { model: Pokemon, as: "p3" },
+      { model: Pokemon, as: "p4" },
+      { model: Pokemon, as: "p5" },
+      { model: Pokemon, as: "p6" }
     ]
   })
     .then(data => res.send(data))
