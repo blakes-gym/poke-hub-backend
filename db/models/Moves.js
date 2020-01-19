@@ -11,10 +11,22 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Moves.associate = function(models) {
-    models.Moves.hasMany(models.Wishlist, { as: "move1" })
-    models.Moves.hasMany(models.Wishlist, { as: "move2" })
-    models.Moves.hasMany(models.Wishlist, { as: "move3" })
-    models.Moves.hasMany(models.Wishlist, { as: "move4" })
+    models.Moves.hasMany(models.Wishlist, {
+      as: "move1",
+      foreignKey: "m1"
+    })
+    // models.Moves.hasMany(models.Wishlist, {
+    //   as: "move2",
+    //   foreignKey: "m2"
+    // })
+    // models.Moves.hasMany(models.Wishlist, {
+    //   as: "move3",
+    //   foreignKey: "m3"
+    // })
+    // models.Moves.hasMany(models.Wishlist, {
+    //   as: "move4",
+    //   foreignKey: "m4"
+    // })
   }
 
   return Moves

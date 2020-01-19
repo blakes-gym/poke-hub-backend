@@ -46,7 +46,11 @@ module.exports = () =>
             item: "rare candy",
             wlPokeId: i,
             nature: "shy UWU",
-            caught: true
+            caught: true,
+            move1Id: 4
+            // m2Id: 2,
+            // m3Id: 3,
+            // m4Id: 4
           })
         }
         Wishlist.bulkCreate(wlSeed)

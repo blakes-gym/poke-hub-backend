@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 
     models.Pokemon.hasMany(models.Wishlist, {
       as: "wlPoke",
-      foreignKey: "wlP"
+      foreignKey: "wlPId"
     })
   }
 

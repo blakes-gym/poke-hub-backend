@@ -1,13 +1,24 @@
 const express = require("express")
 const router = express.Router()
-const { Wishlist } = require("../db/models")
-const { Pokemon } = require("../db/models")
+const { Pokemon, Wishlist, Moves } = require("../db/models")
 
 //retrieve all pokemon from the wishlist
 
 router.get("/", (req, res) => {
   Wishlist.findAll({
-    include: [{ model: Pokemon, as: "wlPoke" }]
+    include: [
+      {
+        model: Pokemon,
+        as: "wlPoke"
+      },
+      {
+        model: Moves,
+        as: "move1"
+        // as: "move2",
+        // as: "move3",
+        // as: "move4"
+      }
+    ]
   })
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
