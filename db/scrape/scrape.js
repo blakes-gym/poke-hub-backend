@@ -1,7 +1,7 @@
 const cheerio = require('cheerio')
 const request = require('request')
 const fs = require('file-system')
-const pokemonArr = require('./names.js')
+const pokemonArr = require('../data/names.js/index.js')
 
 // const pokemonArr = ['Charizard', 'Venusaur', 'Whismur', 'Hitmonlee']
 const file = 'db/pokemon_data.csv'

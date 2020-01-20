@@ -1,126 +1,72 @@
-const Sequelize = require('sequelize')
-const { db } = require('../index.js')
+const types = require("../data/types")
 
-const Model = Sequelize.Model
-
-//Pokemon model
-
-class Pokemon extends Model {}
-
-const types = [
-  [
-    'normal',
-    'fire',
-    'water',
-    'electric',
-    'grass',
-    'ice',
-    'fighting',
-    'poison',
-    'ground',
-    'flying',
-    'psychic',
-    'bug',
-    'rock',
-    'ghost',
-    'dragon',
-    'dark',
-    'steel',
-    'fairy'
-  ]
-]
-
-Pokemon.init(
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Pokemon = sequelize.define("Pokemon", {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true
     },
-    name: Sequelize.STRING,
-    sprite: Sequelize.STRING,
-    icon: Sequelize.STRING,
+    name: DataTypes.STRING,
+    sprite: DataTypes.STRING,
+    icon: DataTypes.STRING,
     type1: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isIn: types
       }
     },
     type2: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isIn: types
       }
     },
-    hp: Sequelize.INTEGER,
-    atk: Sequelize.INTEGER,
-    def: Sequelize.INTEGER,
-    spatk: Sequelize.INTEGER,
-    spdef: Sequelize.INTEGER,
-    speed: Sequelize.INTEGER,
+    hp: DataTypes.INTEGER,
+    atk: DataTypes.INTEGER,
+    def: DataTypes.INTEGER,
+    spatk: DataTypes.INTEGER,
+    spdef: DataTypes.INTEGER,
+    speed: DataTypes.INTEGER,
     total: {
-      type: Sequelize.VIRTUAL,
+      type: DataTypes.VIRTUAL,
       get() {
         return (
           this.hp + this.atk + this.def + this.spatk + this.spdef + this.speed
         )
       }
-    },
-    moveOne: Sequelize.STRING,
-    moveTwo: Sequelize.STRING,
-    moveThree: Sequelize.STRING,
-    moveFour: Sequelize.STRING,
-    item: Sequelize.STRING,
-    nature: Sequelize.STRING,
-    wishList: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false
-    },
-  },
-  {
-    sequelize: db,
-    modelName: 'pokemon',
-    indexes: [
-      {
-        unique: true,
-        fields: ['id']
-      }
-    ]
-  }
-)
-
-//Team model
-
-class Team extends Model {}
-
-Team.init(
-  {
-  id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-  teamId: {
-      type: Sequelize.INTEGER
-  },
-  pokeId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Pokemon,
-      key: 'id'
     }
-  },
-  teamName: Sequelize.STRING
-},
-{
-  sequelize: db,
-  modelName: 'team'
+    // moveOne: DataTypes.STRING,
+    // moveTwo: DataTypes.STRING,
+    // moveThree: DataTypes.STRING,
+    // moveFour: DataTypes.STRING,
+    // item: DataTypes.STRING,
+    // nature: DataTypes.STRING,
+    // wishList: {
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: false
+    // }
+  })
+  Pokemon.associate = function(models) {
+    models.Pokemon.hasMany(models.Team, { as: "p1", foreignKey: "p1Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p2", foreignKey: "p2Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p3", foreignKey: "p3Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p4", foreignKey: "p4Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p5", foreignKey: "p5Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p6", foreignKey: "p6Id" })
+
+    models.Pokemon.hasMany(models.Wishlist, {
+      as: "wlPoke",
+      foreignKey: "wlPId"
+    })
+  }
+
+  return Pokemon
 }
-)
 
-// Pokemon and Team associations
+// const Pokemon = require('./models/Pokemon')
+// const Team = require('./models/Team')
 
-Pokemon.belongsToMany(Team, {through: 'PokemonTeam'})
-Team.belongsToMany(Pokemon, {through: 'PokemonTeam'})
+// // Pokemon and Team associations
 
-module.exports.Pokemon = Pokemon
-module.exports.Team = Team
+// Pokemon.belongsToMany(Team, { through: 'PokemonTeam' })
+// Pokemon.belongsToMany(Pokemon, { through: 'PokemonTeam' })
