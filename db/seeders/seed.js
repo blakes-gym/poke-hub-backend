@@ -1,12 +1,13 @@
-const { Pokemon, Team } = require('../models')
-const fs = require('fs')
-const _ = require('lodash')
+const { Pokemon, Team, Wishlist } = require("../models")
+const fs = require("fs")
+const _ = require("lodash")
+const dummyData = require("../data/dummyData")
 
-const data = fs.readFileSync('db/data/pokemon.csv', 'utf8')
-const split = data.split('\n')
+const data = fs.readFileSync("db/data/pokemon.csv", "utf8")
+const split = data.split("\n")
 const parsed = []
 for (const [i, pokemon] of split.entries()) {
-  const split2 = pokemon.split(',')
+  const split2 = pokemon.split(",")
   const obj = {
     id: split2[0],
     name: split2[1],
@@ -29,7 +30,7 @@ module.exports = () =>
     Pokemon.bulkCreate(parsed)
       .then(data =>
         Team.create({
-          name: 'best',
+          name: "best",
           p1Id: 1,
           p2Id: 2,
           p3Id: 3
@@ -38,6 +39,18 @@ module.exports = () =>
           // p6Id: 6
         })
       )
+      .then(data => {
+        let wlSeed = []
+        for (let i = 1; i < 5; i++) {
+          wlSeed.push({
+            item: "rare candy",
+            wlPokeId: i,
+            nature: "shy UWU",
+            caught: true
+          })
+        }
+        Wishlist.bulkCreate(wlSeed)
+      })
       .then(data => resolve(data))
       .catch(err => reject(err))
   })

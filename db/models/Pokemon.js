@@ -1,7 +1,7 @@
-const types = require('../data/types')
+const types = require("../data/types")
 
 module.exports = (sequelize, DataTypes) => {
-  const Pokemon = sequelize.define('Pokemon', {
+  const Pokemon = sequelize.define("Pokemon", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true
@@ -47,12 +47,17 @@ module.exports = (sequelize, DataTypes) => {
     // }
   })
   Pokemon.associate = function(models) {
-    models.Pokemon.hasMany(models.Team, { as: 'p1', foreignKey: 'p1Id' })
-    models.Pokemon.hasMany(models.Team, { as: 'p2', foreignKey: 'p2Id' })
-    models.Pokemon.hasMany(models.Team, { as: 'p3', foreignKey: 'p3Id' })
-    models.Pokemon.hasMany(models.Team, { as: 'p4', foreignKey: 'p4Id' })
-    models.Pokemon.hasMany(models.Team, { as: 'p5', foreignKey: 'p5Id' })
-    models.Pokemon.hasMany(models.Team, { as: 'p6', foreignKey: 'p6Id' })
+    models.Pokemon.hasMany(models.Team, { as: "p1", foreignKey: "p1Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p2", foreignKey: "p2Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p3", foreignKey: "p3Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p4", foreignKey: "p4Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p5", foreignKey: "p5Id" })
+    models.Pokemon.hasMany(models.Team, { as: "p6", foreignKey: "p6Id" })
+
+    models.Pokemon.hasMany(models.Wishlist, {
+      as: "wlPoke",
+      foreignKey: "wlPId"
+    })
   }
 
   return Pokemon
