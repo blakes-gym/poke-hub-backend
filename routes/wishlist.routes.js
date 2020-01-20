@@ -25,4 +25,31 @@ router.post("/", (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
+//delete a pokemon from the wishlist
+
+router.delete("/:id", (req, res) => {
+  Wishlist.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(data => res.status(200).end("DELETED"))
+    .catch(err => res.status(500).send(err))
+})
+
+//update a pokemon on the wishlist
+
+router.put("/", (req, res) => {
+  Wishlist.update(
+    { ...req.body },
+    {
+      where: {
+        id: req.body.id
+      }
+    }
+  )
+    .then(data => res.status(200).end("UPDATED"))
+    .catch(err => res.status(500).send(err))
+})
+
 module.exports = router
