@@ -5,17 +5,17 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
+    move1: DataTypes.STRING,
+    move2: DataTypes.STRING,
+    move3: DataTypes.STRING,
+    move4: DataTypes.STRING,
+    item: DataTypes.STRING,
     nature: DataTypes.STRING,
     caught: DataTypes.BOOLEAN
   })
 
   Wishlist.associate = function(models) {
     models.Wishlist.belongsTo(models.Pokemon, { as: "wlPoke" })
-
-    models.Wishlist.belongsTo(models.Moves, { as: "move1" })
-    // models.Wishlist.belongsTo(models.Moves, { as: "move2" })
-    // models.Wishlist.belongsTo(models.Moves, { as: "move3" })
-    // models.Wishlist.belongsTo(models.Moves, { as: "move4" })
   }
 
   return Wishlist

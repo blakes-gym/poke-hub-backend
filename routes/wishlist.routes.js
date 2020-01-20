@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { Pokemon, Wishlist, Moves } = require("../db/models")
+const { Pokemon, Wishlist } = require("../db/models")
 
 //retrieve all pokemon from the wishlist
 
@@ -10,13 +10,6 @@ router.get("/", (req, res) => {
       {
         model: Pokemon,
         as: "wlPoke"
-      },
-      {
-        model: Moves,
-        as: "move1"
-        // as: "move2",
-        // as: "move3",
-        // as: "move4"
       }
     ]
   })

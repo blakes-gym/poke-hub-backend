@@ -1,4 +1,4 @@
-const { Pokemon, Team, Wishlist, Moves } = require("../models")
+const { Pokemon, Team, Wishlist } = require("../models")
 const fs = require("fs")
 const _ = require("lodash")
 const dummyData = require("../data/dummyData")
@@ -54,19 +54,6 @@ module.exports = () =>
           })
         }
         Wishlist.bulkCreate(wlSeed)
-      })
-      .then(data => {
-        let moveSeed = []
-        dummyData.forEach(pokemon => {
-          for (let i = 0; i < pokemon.Moves.length; i++) {
-            moveSeed.push({
-              moveName: pokemon.Moves[i].Move,
-              power: pokemon.Moves[i].Power,
-              type: pokemon.Moves[i].Type
-            })
-          }
-        })
-        Moves.bulkCreate(moveSeed)
       })
       .then(data => resolve(data))
       .catch(err => reject(err))
