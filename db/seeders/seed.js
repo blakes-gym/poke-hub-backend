@@ -45,8 +45,7 @@ module.exports = () =>
           wlSeed.push({
             item: "rare candy",
             wlPokeId: i,
-            nature: "shy UWU",
-            caught: true
+            nature: "shy UWU"
           })
         }
         Wishlist.bulkCreate(wlSeed)

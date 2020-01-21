@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     move4: DataTypes.STRING,
     item: DataTypes.STRING,
     nature: DataTypes.STRING,
-    caught: DataTypes.BOOLEAN
+    caught: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   })
 
   Wishlist.associate = function(models) {
