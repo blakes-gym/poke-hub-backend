@@ -1,6 +1,6 @@
-const { Client } = require('pg')
+const { Pool } = require('pg')
 
-const client = new Client({
+const pool = new Pool({
   user: process.env.DBUSER,
   host: process.env.DBHOST,
   database: process.env.DB,
@@ -8,4 +8,4 @@ const client = new Client({
   port: process.env.DBPORT
 })
 
-module.exports = client
+module.exports = pool
