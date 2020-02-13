@@ -1,25 +1,23 @@
-module.exports = (sequelize, DataTypes) => {
-  const Wishlist = sequelize.define("Wishlist", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    move1: DataTypes.STRING,
-    move2: DataTypes.STRING,
-    move3: DataTypes.STRING,
-    move4: DataTypes.STRING,
-    item: DataTypes.STRING,
-    nature: DataTypes.STRING,
-    caught: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+const Model = require('./Model')
+const { STRING, BOOL, SERIAL } = require('../constants/types')
+
+class WishList extends Model {
+  constructor() {
+    super()
+    this.columns = {
+      id: SERIAL,
+      m1: STRING,
+      m2: STRING,
+      m3: STRING,
+      m4: STRING,
+      item: STRING,
+      nature: STRING,
+      caught: BOOL
     }
-  })
-
-  Wishlist.associate = function(models) {
-    models.Wishlist.belongsTo(models.Pokemon, { as: "wlPoke" })
+    this.primaryKey = 'id'
   }
-
-  return Wishlist
 }
+
+const wishList = new WishList()
+
+module.exports = wishList
