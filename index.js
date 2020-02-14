@@ -3,8 +3,8 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
+const mongoose = require('mongoose')
 const seed = require('./db/seed')
-const db = require('./db')
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -18,10 +18,13 @@ for (const route in routes) {
 }
 
 ;(async function() {
+  await mongoose.connect(process.env.DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   if (process.env.NODE_ENV !== 'production') {
     await seed()
   }
-  await db.connect()
   console.log('\nconnected to db')
   app.listen(PORT, () => {
     console.log(`\nlistening on ${PORT}`)
