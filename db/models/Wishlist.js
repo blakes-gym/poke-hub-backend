@@ -1,23 +1,16 @@
-const Model = require('./Model')
-const { STRING, BOOL, SERIAL } = require('../constants/types')
+const mongoose = require('mongoose')
 
-class WishList extends Model {
-  constructor() {
-    super()
-    this.columns = {
-      id: SERIAL,
-      m1: STRING,
-      m2: STRING,
-      m3: STRING,
-      m4: STRING,
-      item: STRING,
-      nature: STRING,
-      caught: BOOL
-    }
-    this.primaryKey = 'id'
-  }
-}
+const schema = new mongoose.Schema({
+  pokemon: { type: mongoose.Schema.Types.ObjectId, ref: 'Pokemon' },
+  m1: String,
+  m2: String,
+  m3: String,
+  m4: String,
+  item: String,
+  nature: String,
+  caught: Boolean
+})
 
-const wishList = new WishList()
+const WishList = mongoose.model('WishList', schema)
 
-module.exports = wishList
+module.exports = WishList
