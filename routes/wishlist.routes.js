@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { WishList } = require('../db/models')
-const { error } = require('./util')
+const { error } = require('../util')
 
 router.get('/', (req, res) =>
   WishList.find(req.query)

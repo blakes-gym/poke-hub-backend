@@ -26,7 +26,5 @@ for (const route in routes) {
     await seed()
   }
   console.log('\nconnected to db')
-  app.listen(PORT, () => {
-    console.log(`\nlistening on ${PORT}`)
-  })
+  app.listen(PORT, () => console.log(`\nlistening on ${PORT}`))
 })()

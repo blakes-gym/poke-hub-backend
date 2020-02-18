@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Team } = require('../db/models')
-const { error } = require('./util')
+const { error } = require('../util')
 
 router.get('/', (req, res) => {
   Team.find(req.query)
